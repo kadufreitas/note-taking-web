@@ -1,0 +1,41 @@
+import { createGlobalStyle } from 'styled-components';
+
+export default createGlobalStyle`
+  *{
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    box-sizing: border-box;
+  }
+
+  html, body, #root{
+    min-height: 100%;
+    background-color: #F6F6F6;
+  }
+
+  body{
+    -webkit-font-smoothing: antialiased !important;
+  }
+
+  body, input, button{
+    color: #222;
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  button{
+    cursor: pointer;
+  }
+
+  div.DraftEditor-root {
+    background-color: #fffef7;
+    width:80%;
+    margin:auto;
+    box-shadow: 0px 0px 6px 1px rgba(0,0,0,0.5);
+    height:300px;
+    overflow-y: scroll;
+    padding:20px;
+    font-size: 18px;
+    font-family: 'calibri', sans-serif;
+  }
+`;
