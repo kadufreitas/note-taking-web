@@ -1,12 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import { Container } from './styles';
+import Tag from '../Tag/Tag';
+import { Container, TagsList } from './styles';
 
 export default function Note({ name }) {
   return (
-    <div>
+    <Container>
       <h5>{name}</h5>
-    </div>
+      <p>
+        Today marks what would have been the 100th birthday of the leading
+        Danish architect, jorn{' '}
+      </p>
+      <TagsList>
+        <Tag />
+      </TagsList>
+    </Container>
   );
 }
 Note.propTypes = {

@@ -9,7 +9,7 @@ export default createGlobalStyle`
   }
 
   html, body, #root{
-    min-height: 100%;
+    height: 100%;
     background-color: #F6F6F6;
   }
 

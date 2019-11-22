@@ -1,13 +1,17 @@
 import React from 'react';
 
-import { Container } from './styles';
+import { FaPlus } from 'react-icons/fa';
+import SearchInput from '../SearchInput/SearchInput';
+import { Container, CreateButton } from './styles';
 
 export default function Topbar() {
   return (
     <Container>
-      <div>
-        <input type="text" name="" placeholder="Search" />
-      </div>
+      <SearchInput />
+      <CreateButton>
+        <FaPlus />
+        New Note
+      </CreateButton>
     </Container>
   );
 }

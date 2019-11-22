@@ -2,19 +2,19 @@ import React from 'react';
 
 import { FaStickyNote } from 'react-icons/fa';
 
-import { Container } from './styles';
+import { Container, MenuSidebar, ItemMenu } from './styles';
 
 export default function Sidebar() {
   return (
     <Container>
       <h3>
-        <FaStickyNote />
+        <FaStickyNote size={18} />
         Notetaking
       </h3>
-      <ul>
-        <li>All notes</li>
-        <li>Tags</li>
-      </ul>
+      <MenuSidebar>
+        <ItemMenu activate>All notes</ItemMenu>
+        <ItemMenu>Tags</ItemMenu>
+      </MenuSidebar>
     </Container>
   );
 }

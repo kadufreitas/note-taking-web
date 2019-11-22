@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { NoteEditor, Notelist, Sidebar, Topbar } from '../../components';
-import { Container, Wrapper } from './styles';
+import { Container, Wrapper, Row } from './styles';
 
 export default function Main() {
   return (
@@ -9,10 +9,10 @@ export default function Main() {
       <Sidebar />
       <Wrapper>
         <Topbar />
-        <Container>
+        <Row>
           <Notelist />
           <NoteEditor />
-        </Container>
+        </Row>
       </Wrapper>
     </Container>
   );
