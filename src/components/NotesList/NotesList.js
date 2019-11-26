@@ -11,8 +11,9 @@ export default function NoteList({ notes, handleSelectNote }) {
         <Note
           title={note.title}
           text={note.text}
+          tags={note.tags}
           key={note.id}
-          handleSelectNote={() => handleSelectNote(note)}
+          handleSelectNote={() => handleSelectNote({ ...note, edit: false })}
         />
       ))}
     </Container>

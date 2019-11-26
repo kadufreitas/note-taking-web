@@ -14,12 +14,20 @@ export default function Main() {
     text: '',
   });
   const [loading, setLoading] = React.useState(false);
-  const [searchText, setSearchText] = React.useState('');
+  const [searchText, setSearchText] = React.useState(null);
+  const [tagSelected, setTagSelected] = React.useState(null);
   const [timer, setTimer] = React.useState(null);
 
   async function fetchData() {
     setLoading(true);
-    const response = await api.get(`notes-list/`);
+    let response = null;
+    if (searchText) {
+      response = await api.get(`notes-list/?search=${searchText}`);
+    } else if (tagSelected) {
+      response = await api.get(`notes-list/?tag=${tagSelected}`);
+    } else {
+      response = await api.get(`notes-list/`);
+    }
     setNotes(response.data);
     setLoading(false);
   }
@@ -62,22 +70,52 @@ export default function Main() {
       setLoading(false);
     }
   };
+
   const handleEditeField = (e, field) => {
-    setNoteSelected({ ...noteSelected, [field]: e.target.value });
-    console.log(timer);
-    clearTimeout(timer);
-    setTimer(setTimeout(handleSaveNote, WAIT_INTERVAL));
+    setNoteSelected({ ...noteSelected, [field]: e.target.value, edit: true });
+  };
+
+  const handleSearchNote = e => {
+    setSearchText(e.target.value);
+  };
+
+  const handleSearchNoteByTag = id => {
+    if (id) {
+      setTagSelected(id);
+      return;
+    }
+    setTagSelected(null);
   };
 
   React.useEffect(() => {
-    fetchData();
+    if (searchText) {
+      clearTimeout(timer);
+      setTimer(setTimeout(() => fetchData(), WAIT_INTERVAL));
+    } else {
+      fetchData();
+    }
   }, [searchText]);
+
+  React.useEffect(() => {
+    fetchData();
+  }, [tagSelected]);
+
+  React.useEffect(() => {
+    if (noteSelected.title && noteSelected.edit) {
+      console.log(timer);
+      clearTimeout(timer);
+      setTimer(setTimeout(handleSaveNote, WAIT_INTERVAL));
+    }
+  }, [noteSelected]);
 
   return (
     <Container>
-      <Sidebar />
+      <Sidebar handleSearchNoteByTag={handleSearchNoteByTag} />
       <Wrapper>
-        <Topbar handleCreateNote={handleCreateNote} />
+        <Topbar
+          handleCreateNote={handleCreateNote}
+          handleSearchNote={handleSearchNote}
+        />
         <Row>
           <Notelist notes={notes} handleSelectNote={handleSelectNote} />
           <NoteEditor

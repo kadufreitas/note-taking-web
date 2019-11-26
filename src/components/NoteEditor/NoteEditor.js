@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Container, Input, TextArea } from './styles';
+import Bottombar from '../Bottombar/Bottombar';
 
 export default function NoteEditor({ noteToEdit, handleEditeField }) {
   return (
@@ -24,6 +25,7 @@ export default function NoteEditor({ noteToEdit, handleEditeField }) {
           placeholder="Aqui você pode escrever mais detalhes sobre ela."
         />
       </div>
+      <Bottombar />
     </Container>
   );
 }
