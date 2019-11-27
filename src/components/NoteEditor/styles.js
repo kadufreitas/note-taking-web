@@ -11,7 +11,7 @@ export const Container = styled.div`
   box-shadow: 0 4px 25px 0 rgba(0, 0, 0, 0.1);
   /* - 16px para descontar o margin-top usado */
   height: calc(100% - 16px);
-  div:nth-child(2) {
+  .text-area {
     height: calc(100% - 30px);
   }
 `;

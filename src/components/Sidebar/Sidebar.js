@@ -1,24 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { FaStickyNote, FaCircle } from 'react-icons/fa';
-import api from '../../services/api';
+import { FaStickyNote, FaCircle, FaPlus } from 'react-icons/fa';
 
 import { Container, MenuSidebar, ItemMenu, TagsList, Tag } from './styles';
 
-export default function Sidebar({ handleSearchNoteByTag }) {
-  const [tags, setTags] = React.useState([]);
-
-  async function fetchTags() {
-    let response = null;
-    response = await api.get(`tags/`);
-
-    setTags(response.data);
-  }
-  React.useEffect(() => {
-    fetchTags();
-  }, [tags]);
-
+export default function Sidebar({
+  tags,
+  handleSearchNoteByTag,
+  handleClearFilters,
+  handleToggleForm,
+}) {
   return (
     <Container>
       <h3>
@@ -26,16 +18,25 @@ export default function Sidebar({ handleSearchNoteByTag }) {
         Notetaking
       </h3>
       <MenuSidebar>
-        <ItemMenu activate onClick={() => handleSearchNoteByTag()}>
+        <ItemMenu activate onClick={() => handleClearFilters()}>
           All notes
         </ItemMenu>
         <ItemMenu>
-          Tags
+          <div className="tags-title">
+            Tags
+            <button
+              type="button"
+              onClick={handleToggleForm}
+              className="default-button default-button__small"
+            >
+              <FaPlus />
+            </button>
+          </div>
           <TagsList>
             {tags.map(tag => (
               <Tag
                 key={tag.id}
-                color="green"
+                color={tag.color}
                 onClick={() => handleSearchNoteByTag(tag.id)}
               >
                 <FaCircle />
@@ -48,7 +49,13 @@ export default function Sidebar({ handleSearchNoteByTag }) {
     </Container>
   );
 }
+Sidebar.defaultProps = {
+  tags: [],
+};
 
 Sidebar.propTypes = {
   handleSearchNoteByTag: PropTypes.func.isRequired,
+  handleClearFilters: PropTypes.func.isRequired,
+  handleToggleForm: PropTypes.func.isRequired,
+  tags: PropTypes.arrayOf(PropTypes.any),
 };

@@ -36,6 +36,12 @@ export const ItemMenu = styled.li`
   padding: 25px 0px;
   padding-left: 20px;
   cursor: pointer;
+
+  .tags-title {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
 `;
 
 export const TagsList = styled.ul`

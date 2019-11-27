@@ -22,6 +22,13 @@ export const Container = styled.div`
   }
 `;
 
-export const TagsList = styled.div`
-  margin-top: 50px;
+export const TagsList = styled.ul`
+  /* padding-top: 50px; */
+  li {
+    margin-right: 10px;
+  }
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+  margin: 35px 0 0 0;
 `;
