@@ -35,4 +35,27 @@ export const ItemMenu = styled.li`
   border-left: 4px solid ${props => setColor(props).secondary};
   padding: 25px 0px;
   padding-left: 20px;
+  cursor: pointer;
+
+  .tags-title {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+`;
+
+export const TagsList = styled.ul`
+  list-style: none;
+`;
+export const Tag = styled.li`
+  padding: 7px 0px;
+  padding-left: 15px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  svg {
+    padding-right: 6px;
+    font-size: 17px;
+    color: ${props => props.color};
+  }
 `;

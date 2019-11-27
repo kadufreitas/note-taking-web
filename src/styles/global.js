@@ -38,4 +38,23 @@ export default createGlobalStyle`
     font-size: 18px;
     font-family: 'calibri', sans-serif;
   }
+
+  .default-button{
+    color: #32b3fc;
+    font-size: 1.2rem;
+    background-color: transparent;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 0.5rem;
+    svg {
+      color: #32b3fc;
+    }
+    &:hover {
+      background-color: #efefef;
+    }
+  }
+  .default-button__small{
+    font-size: 0.8rem;
+    padding: 5px 10px;
+  }
 `;

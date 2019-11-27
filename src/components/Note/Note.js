@@ -1,22 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import Tag from '../Tag/Tag';
 import { Container, TagsList } from './styles';
 
-export default function Note({ name }) {
+export default function Note({ title, text, tags, handleSelectNote }) {
   return (
-    <Container>
-      <h5>{name}</h5>
-      <p>
-        Today marks what would have been the 100th birthday of the leading
-        Danish architect, jorn{' '}
-      </p>
+    <Container onClick={handleSelectNote}>
+      <h5>{title}</h5>
+      <p>{text}</p>
       <TagsList>
-        <Tag />
+        {tags.map(tag => (
+          <Tag key={tag.id} name={tag.name} color={tag.color} />
+        ))}
       </TagsList>
     </Container>
   );
 }
 Note.propTypes = {
-  name: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired,
+  tags: PropTypes.arrayOf(PropTypes.any).isRequired,
+  handleSelectNote: PropTypes.func.isRequired,
 };
