@@ -73,7 +73,6 @@ export default function TagInput({ handleAddTag }) {
       <Input
         onChange={setName}
         onKeyDown={handleKeyDown}
-        // value={tagName}
         type="text"
         name="searchText"
         placeholder="Type enter to save"

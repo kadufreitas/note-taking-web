@@ -1,8 +1,6 @@
 import React from 'react';
 import { Editor, EditorState } from 'draft-js';
 
-// import { Container } from './styles';
-
 export default function Repository() {
   const [editorState, setEditorState] = React.useState(
     EditorState.createEmpty()

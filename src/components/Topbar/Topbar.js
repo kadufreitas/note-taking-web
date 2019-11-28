@@ -6,11 +6,13 @@ import { FaPlus, FaSignOutAlt } from 'react-icons/fa';
 import SearchInput from '../SearchInput/SearchInput';
 import { Container, CreateButton } from './styles';
 
+import { logout } from '../../services/auth';
+
 function Topbar({ handleCreateNote, handleSearchNote, searchText, history }) {
   const handleSignOut = e => {
     e.preventDefault();
-    localStorage.removeItem('user');
-    history.push('/login');
+    logout();
+    history.push('/');
   };
 
   return (
