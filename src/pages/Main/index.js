@@ -8,7 +8,9 @@ import FormTag from '../../components/FormTag/FormTag';
 
 const WAIT_INTERVAL = 500;
 
-export default function Main() {
+export default function Main(props) {
+  const USER = JSON.parse(localStorage.getItem('user'));
+  const TOKEN = USER ? `Token ${USER.token}` : null;
   const [notes, setNotes] = React.useState([]);
   const [noteSelected, setNoteSelected] = React.useState({
     title: '',
@@ -29,10 +31,6 @@ export default function Main() {
     setTags(response.data);
   }
 
-  React.useEffect(() => {
-    fetchTags();
-  }, []);
-
   async function fetchData() {
     setLoading(true);
     let query = '';
@@ -47,6 +45,13 @@ export default function Main() {
     setLoading(false);
   }
 
+  React.useEffect(() => {
+    api.defaults.headers.common.Authorization = TOKEN;
+    console.log(TOKEN);
+    fetchData();
+    fetchTags();
+  }, [props]);
+
   const handleSelectNote = note => {
     setNoteSelected(note);
   };
@@ -59,19 +64,23 @@ export default function Main() {
     });
   };
 
+  const handleDeleteNote = async id => {
+    await api.delete(`notes/${id}`);
+    handleCreateNote();
+    fetchData();
+  };
+
   const handleSaveNote = async () => {
     setLoading(true);
     try {
       if (noteSelected.id) {
         await api.put(`notes/${noteSelected.id}/`, {
-          client: 1,
           title: noteSelected.title,
           text: noteSelected.text,
           tags: noteSelected.tags.map(tag => tag.id),
         });
       } else {
         const response = await api.post(`notes/`, {
-          client: 1,
           title: noteSelected.title,
           text: noteSelected.text,
           tags: noteSelected.tags.map(tag => tag.id),
@@ -120,9 +129,6 @@ export default function Main() {
 
   const handleAddTagToNote = tagId => {
     const currentTag = tags.filter(tag => tag.id === parseInt(tagId, 10));
-    console.log(currentTag);
-    // const newTags = noteSelected.tags.push(tag);
-    // setNoteSelected({ ...noteSelected, tags: newTags, edit: true });
   };
 
   const handleToggleForm = e => {
@@ -145,7 +151,6 @@ export default function Main() {
 
   React.useEffect(() => {
     if (noteSelected.title && noteSelected.edit) {
-      console.log(timer);
       clearTimeout(timer);
       setTimer(setTimeout(handleSaveNote, WAIT_INTERVAL));
     }
@@ -173,6 +178,7 @@ export default function Main() {
             tags={noteSelected.tags}
             allTags={tags}
             handleAddTagToNote={handleAddTagToNote}
+            handleDeleteNote={handleDeleteNote}
           />
         </Row>
       </Wrapper>

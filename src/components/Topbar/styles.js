@@ -10,6 +10,14 @@ export const Container = styled.div`
   z-index: 2;
   button {
     margin-left: 20px;
+    &.default-button {
+      margin-right: 30px;
+    }
+  }
+  .flex-right {
+    display: flex;
+    flex: 1;
+    justify-content: flex-end;
   }
 `;
 

@@ -10,6 +10,7 @@ export default function NoteEditor({
   tags,
   allTags,
   handleAddTagToNote,
+  handleDeleteNote,
 }) {
   return (
     <Container>
@@ -35,6 +36,8 @@ export default function NoteEditor({
         tags={tags}
         allTags={allTags}
         handleAddTagToNote={handleAddTagToNote}
+        handleDeleteNote={handleDeleteNote}
+        noteId={noteToEdit.id}
       />
     </Container>
   );
@@ -51,4 +54,5 @@ NoteEditor.propTypes = {
   tags: PropTypes.arrayOf(PropTypes.any),
   allTags: PropTypes.arrayOf(PropTypes.any),
   handleAddTagToNote: PropTypes.func.isRequired,
+  handleDeleteNote: PropTypes.func.isRequired,
 };

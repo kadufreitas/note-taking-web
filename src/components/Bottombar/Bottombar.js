@@ -6,7 +6,13 @@ import { FaPlus, FaTrash } from 'react-icons/fa';
 import Tag from '../Tag/Tag';
 import { Container, OptionButton, TagsList } from './styles';
 
-export default function Bottombar({ tags, allTags, handleAddTagToNote }) {
+export default function Bottombar({
+  tags,
+  allTags,
+  handleAddTagToNote,
+  handleDeleteNote,
+  noteId,
+}) {
   // const options = [
   //   { name: 'Swedish', value: 'sv' },
   //   { name: 'English', value: 'en' },
@@ -41,7 +47,7 @@ export default function Bottombar({ tags, allTags, handleAddTagToNote }) {
           <FaPlus />
         </OptionButton> */}
       </TagsList>
-      <OptionButton>
+      <OptionButton onClick={() => handleDeleteNote(noteId)}>
         <FaTrash />
       </OptionButton>
     </Container>
@@ -51,10 +57,13 @@ export default function Bottombar({ tags, allTags, handleAddTagToNote }) {
 Bottombar.defaultProps = {
   tags: [],
   allTags: [],
+  noteId: null,
 };
 
 Bottombar.propTypes = {
   tags: PropTypes.arrayOf(PropTypes.any),
   handleAddTagToNote: PropTypes.func.isRequired,
+  handleDeleteNote: PropTypes.func.isRequired,
   allTags: PropTypes.arrayOf(PropTypes.any),
+  noteId: PropTypes.number,
 };
