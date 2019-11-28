@@ -48,7 +48,5 @@
     "eslint-plugin-react": "^7.16.0",
     "eslint-plugin-react-hooks": "^1.7.0",
     "prettier": "^1.19.1"
-  },
-  "homepage": "https://kadufreitas.github.io/note-taking-web",
-  "proxy": "http://localhost:8000"
+  }
 }
