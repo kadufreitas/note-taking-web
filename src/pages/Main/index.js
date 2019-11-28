@@ -6,11 +6,12 @@ import { Container, Wrapper, Row } from './styles';
 import api from '../../services/api';
 import FormTag from '../../components/FormTag/FormTag';
 
+import { getToken } from '../../services/auth';
+
 const WAIT_INTERVAL = 500;
 
 export default function Main(props) {
-  const USER = JSON.parse(localStorage.getItem('user'));
-  const TOKEN = USER ? `Token ${USER.token}` : null;
+  const TOKEN = getToken();
   const [notes, setNotes] = React.useState([]);
   const [noteSelected, setNoteSelected] = React.useState({
     title: '',
@@ -47,7 +48,6 @@ export default function Main(props) {
 
   React.useEffect(() => {
     api.defaults.headers.common.Authorization = TOKEN;
-    console.log(TOKEN);
     fetchData();
     fetchTags();
   }, [props]);
@@ -107,15 +107,12 @@ export default function Main(props) {
   const handleSearchNoteByTag = id => {
     if (id) {
       setTagSelected(id);
-      // return;
     }
-    // setTagSelected(null);
   };
 
   const handleClearFilters = () => {
     setSearchText('');
     setTagSelected(null);
-    // fetchData();
   };
 
   const handleAddTag = async tag => {

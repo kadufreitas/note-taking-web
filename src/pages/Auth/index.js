@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom';
 import { Container, Card, ToggleButton } from './styles';
 
 import api from '../../services/api';
+import { login } from '../../services/auth';
 
 const ENTER_KEY = 13;
 
@@ -27,8 +28,9 @@ function Auth({ history }) {
         username: user.name,
         password: user.password,
       });
-      localStorage.setItem('user', JSON.stringify(response.data));
-      history.push('/');
+      login(JSON.stringify(response.data));
+      // localStorage.setItem('user', JSON.stringify(response.data));
+      history.push('/app');
     } catch (error) {
       console.log(error);
     }
@@ -98,21 +100,21 @@ function Auth({ history }) {
           placeholder="Email"
         />
         <input
-          type="password1"
+          type="password"
           value={userRegister.password1}
           onChange={e =>
             setUserRegister({ ...userRegister, password1: e.target.value })
           }
-          name="password2"
+          name="password"
           placeholder="Password"
         />
         <input
-          type="password2"
+          type="password"
           value={userRegister.password2}
           onChange={e =>
             setUserRegister({ ...userRegister, password2: e.target.value })
           }
-          name="password2"
+          name="password"
           placeholder="Password Again"
           onKeyDown={e => handleKeyDown(e, handleRegister)}
         />
